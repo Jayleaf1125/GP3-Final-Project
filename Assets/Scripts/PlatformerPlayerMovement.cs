@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlatformerPlayerMovement : MonoBehaviour
 {
     public float speed;
@@ -16,23 +17,33 @@ public class PlatformerPlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
     [SerializeField] float _rayDistance;
 
+    InputManager _inputManager;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _sr = GetComponent<SpriteRenderer>();
+        _inputManager = InputManager.instance;
+    }
+
+    private void OnEnable()
+    {
+        _inputManager.inputActions.Player.Enable();
+        _inputManager.Jump += Jumping;
+    }
+
+    private void OnDisable()
+    {
+        _inputManager.inputActions.Player.Disable();
+        _inputManager.Jump -= Jumping;
     }
 
     // Update is called once per frame
     void Update()
     {
-        _vm.x = Input.GetAxisRaw("Horizontal");
-
-        if (isVerticalMovementOn) _vm.y = Input.GetAxisRaw("Vertical");
-
         CheckIfPlayerIsGrounded();
-        Jumping();
     }
 
     void CheckIfPlayerIsGrounded()
@@ -45,15 +56,23 @@ public class PlatformerPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.AddForce(_vm * speed * Time.fixedDeltaTime);
+        Movement(); 
+    }
+
+    void Movement()
+    {
+        _vm = _inputManager.MoveDirection;
+        _vm.y = 0f;
+        _rb.linearVelocityX = _vm.x * speed;    
     }
 
     void Jumping()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
-        { 
-            _rb.AddForce(new Vector2(0, jumpForce));
+        if (_isGrounded)
+        {
+            _rb.linearVelocity += (Vector2.up * jumpForce);
             _isGrounded = false;
+            Debug.Log("Jumping Work");
         }
     }
 }
