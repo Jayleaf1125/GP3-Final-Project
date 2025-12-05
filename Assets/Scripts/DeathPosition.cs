@@ -5,23 +5,25 @@ public class DeathPosition : MonoBehaviour
 {
     Vector3 PosSave;
     public GameObject SaveLocationPrefab;
-
     [SerializeField] Transform _lastRespawnPoint;
+    InputManager _inputManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-
+        _inputManager = InputManager.instance;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        if (Input.GetKeyUp(KeyCode.J))
-        {
-            SavePos();
-        }
-        
+        _inputManager.inputActions.Player.Enable();
+        _inputManager.Sacrfirce += SavePos;
+    }
+
+    private void OnDisable()
+    {
+        _inputManager.inputActions.Player.Disable();
+        _inputManager.Sacrfirce -= SavePos;
     }
 
     void SavePos()

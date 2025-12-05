@@ -104,4 +104,4 @@ MonoBehaviour:
   _rayDistance: 7
   _playerLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0

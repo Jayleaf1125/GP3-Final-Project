@@ -15,6 +15,7 @@ public class InputManager : Singleton<InputManager>, IPlayerActions
     public event Action<Vector2> Aim = delegate { };
     public event Action Sacrfirce = delegate { };
     public event Action Jump = delegate { };
+    public event Action Shoot = delegate { };
     #endregion
 
     public Vector2 MoveDirection => inputActions.Player.Move.ReadValue<Vector2>();
@@ -33,7 +34,6 @@ public class InputManager : Singleton<InputManager>, IPlayerActions
         inputActions = new InputActions();
         inputActions.Player.SetCallbacks(this);
     }
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -65,5 +65,10 @@ public class InputManager : Singleton<InputManager>, IPlayerActions
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.performed) Jump.Invoke();
+    }
+
+    public void OnShoot(InputAction.CallbackContext context)
+    {
+        if (context.performed) Shoot.Invoke();
     }
 }

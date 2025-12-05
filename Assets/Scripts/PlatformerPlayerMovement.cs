@@ -1,3 +1,4 @@
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -48,10 +49,17 @@ public class PlatformerPlayerMovement : MonoBehaviour
 
     void CheckIfPlayerIsGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, _rayDistance, groundLayer);
-        Debug.DrawRay(transform.position, Vector2.down * _rayDistance, Color.red);
+        const float HIT_OFFSET = 0.5f;
 
-        _isGrounded = hit.collider != null;
+        RaycastHit2D midHit = Physics2D.Raycast(transform.position, Vector2.down, _rayDistance, groundLayer);
+        RaycastHit2D leftHit = Physics2D.Raycast(new Vector2(transform.position.x - HIT_OFFSET, transform.position.y), Vector2.down, _rayDistance, groundLayer);
+        RaycastHit2D rightHit = Physics2D.Raycast(new Vector2(transform.position.x + HIT_OFFSET, transform.position.y), Vector2.down, _rayDistance, groundLayer);
+
+        Debug.DrawRay(transform.position, Vector2.down * _rayDistance, Color.red);
+        Debug.DrawRay(new Vector2(transform.position.x - HIT_OFFSET, transform.position.y), Vector2.down * _rayDistance, Color.red);
+        Debug.DrawRay(new Vector2(transform.position.x + HIT_OFFSET, transform.position.y), Vector2.down * _rayDistance, Color.red);
+
+        _isGrounded = (leftHit.collider != null) || (midHit.collider != null) || (rightHit.collider != null);
     }
 
     private void FixedUpdate()
