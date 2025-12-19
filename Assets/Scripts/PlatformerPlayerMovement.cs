@@ -6,6 +6,7 @@ public class PlatformerPlayerMovement : MonoBehaviour
 {
     public float speed;
     public float jumpForce;
+    public float sprintForce;
 
     Rigidbody2D _rb;
     SpriteRenderer _sr;
@@ -31,14 +32,17 @@ public class PlatformerPlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        _inputManager.inputActions.Player.Enable();
+        //_inputManager.inputActions.Player.Enable();
+        //SoundManager.instance.PlayBackgroundMusicSound();
         _inputManager.Jump += Jumping;
+        _inputManager.Dash += Dashing;
     }
 
     private void OnDisable()
     {
-        _inputManager.inputActions.Player.Disable();
+        //_inputManager.inputActions.Player.Disable();
         _inputManager.Jump -= Jumping;
+        _inputManager.Dash -= Dashing;  
     }
 
     // Update is called once per frame
@@ -78,9 +82,17 @@ public class PlatformerPlayerMovement : MonoBehaviour
     {
         if (_isGrounded)
         {
+            SoundManager.instance.PlayPlayerJumpSound();
             _rb.linearVelocity += (Vector2.up * jumpForce);
             _isGrounded = false;
             Debug.Log("Jumping Work");
         }
+    }
+
+    // Fix this shit, it does not work 
+    void Dashing()
+    {
+        Debug.Log("Dashing Works");
+        _rb.AddForce(Vector2.right * sprintForce, ForceMode2D.Impulse);
     }
 }
