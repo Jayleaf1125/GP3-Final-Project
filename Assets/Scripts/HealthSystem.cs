@@ -15,6 +15,7 @@ public class HealthSystem : MonoBehaviour
     [Header("Healthbar UI Parameters")]
     [SerializeField] GameObject healthbar;
     [SerializeField] float colorChangeDelay;
+    [SerializeField] ParticleSystem _playDeathParticle;
 
     public bool PlayerDebugging = false;
     Image _healthBarFill;
@@ -62,23 +63,36 @@ public class HealthSystem : MonoBehaviour
 
         if (reamainingHealth <= 0)
         {
-            _currentHealth = 0;
-
-            if (gameObject.CompareTag("Player"))
-            {
-                _soundManager.PlayPlayerDeathSound();
-            } else
-            {
-                _soundManager.PlayEnemyDeathSound();
-            }
-
-                UpdateHealthbar();
-            Destroy(gameObject);
+            HandleDeathLogic();
             return;
         }
 
         _currentHealth = reamainingHealth;
         UpdateHealthbar();
+    }
+    void HandleDeathLogic()
+    {
+        _currentHealth = 0;
+
+        if (gameObject.CompareTag("Player"))
+        {
+            _soundManager.PlayPlayerDeathSound();
+            StartCoroutine(SpawnPlayerDeathVFX(transform.transform));
+        }
+        else
+        {
+            _soundManager.PlayEnemyDeathSound();
+        }
+
+        UpdateHealthbar();
+        Destroy(gameObject);
+    }
+
+    IEnumerator SpawnPlayerDeathVFX(Transform pos)
+    {
+        ParticleSystem obj = Instantiate(_playDeathParticle, pos);
+        yield return new WaitForSeconds(0.6f);
+        Destroy(obj);
     }
 
     public void HealHealth(float heal)
