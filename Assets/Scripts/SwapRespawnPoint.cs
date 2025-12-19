@@ -5,6 +5,8 @@ public class SwapRespawnPoint : MonoBehaviour
     [SerializeField] Transform _newRespawnPoint;
     [SerializeField] float _rayDistance;
     [SerializeField] LayerMask _playerLayer;
+    bool _hasSoundPlayed = false;
+    bool _hasSwaped;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,10 +26,20 @@ public class SwapRespawnPoint : MonoBehaviour
 
         Collider2D player = hit.collider;
 
-        if (player != null)
+        if (player != null && !_hasSwaped)
+        {
+            CheckIfSoundPlayed();
+            player.GetComponent<DeathPosition>().SetLastRespawnPoint(_newRespawnPoint);
+            _hasSwaped = true;
+        }
+    }
+
+    void CheckIfSoundPlayed()
+    {
+        if (!_hasSoundPlayed)
         {
             SoundManager.instance.PlayCheckpointSound();
-            player.GetComponent<DeathPosition>().SetLastRespawnPoint(_newRespawnPoint);
+            _hasSoundPlayed = true;
         }
     }
 }

@@ -81,10 +81,9 @@ public class HealthSystem : MonoBehaviour
         UpdateHealthbar();
     }
 
-    public void HealHealth()
+    public void HealHealth(float heal)
     {
-        const float FLAT_HEAL = 20f;
-        float reamainingHealth = _currentHealth + FLAT_HEAL;
+        float reamainingHealth = _currentHealth + heal;
         StartCoroutine(HealColor());
 
         if (reamainingHealth >= _maxHealth)

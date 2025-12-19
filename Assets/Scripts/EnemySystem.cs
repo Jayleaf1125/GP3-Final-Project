@@ -30,12 +30,14 @@ public class EnemySystem : MonoBehaviour
     public LayerMask playerLayer;
 
     [Header("State Settings")]
-    public float chaseRangeDist;
+    public float attackRangeDist;
     //public float attackRangeDist;
 
     public ParticleSystem ShootParticle;
-    public float ChaseSpeedMultipler;
     bool _alreadyBoosted = false;
+    [SerializeField] float _enemyDamage;
+
+    public GameObject playerObj;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -101,8 +103,14 @@ public class EnemySystem : MonoBehaviour
         transform.Translate(_vm * Speed * Time.fixedDeltaTime);
     }
 
-    void CheckIfPlayerInChaseRange() => _isPlayerInChaseRange = Physics2D.OverlapCircle(transform.position, chaseRangeDist, playerLayer);
+    void CheckIfPlayerInChaseRange() => _isPlayerInChaseRange = Physics2D.OverlapCircle(transform.position, attackRangeDist, playerLayer);
     //void CheckIfPlayerInAttackRange() => _isPlayerInAttackRange = Physics2D.OverlapCircle(transform.position, attackRangeDist, playerLayer);
+
+    IEnumerator DamageOvertime()
+    {
+        playerObj.GetComponent<HealthSystem>().DamageHealth(_enemyDamage);
+        yield return new WaitForSeconds(1f);
+    }
 
 
     void SetState()
@@ -123,6 +131,7 @@ public class EnemySystem : MonoBehaviour
     void Attacking()
     {
         StartCoroutine(SpawnLaserVFX(transform.transform));
+        StartCoroutine(DamageOvertime());
     }
 
     IEnumerator SpawnLaserVFX(Transform pos)
@@ -136,6 +145,6 @@ public class EnemySystem : MonoBehaviour
     {
         // Attack Range
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, chaseRangeDist);
+        Gizmos.DrawWireSphere(transform.position, attackRangeDist);
     }
 }

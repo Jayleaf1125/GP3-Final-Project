@@ -13,6 +13,7 @@ public class SoundManager : Singleton<SoundManager>
     AudioSource checkpointSound;
     AudioSource playerSacfriceSound;
     AudioSource playerAttackSound;
+    AudioSource healSound;
 
     private protected override void Awake()
     {
@@ -33,6 +34,7 @@ public class SoundManager : Singleton<SoundManager>
         checkpointSound = allAudioSources[7];
         playerSacfriceSound = allAudioSources[8];
         playerAttackSound = allAudioSources[9];
+        healSound = allAudioSources[10];
     }
 
     public void PlayBackgroundMusicSound() => backgroundMusicSound.Play();
@@ -45,4 +47,5 @@ public class SoundManager : Singleton<SoundManager>
     public void PlayCheckpointSound() => checkpointSound.Play();
     public void PlayPlayerSacfriceSound() => playerSacfriceSound.Play();
     public void PlayPlayerAttackSound() => playerAttackSound.Play();
+    public void PlayHealSound() => healSound.Play();
 }

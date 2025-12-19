@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class HealthOrb : MonoBehaviour
 {
+    public float healAmount;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,6 +17,11 @@ public class HealthOrb : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player")) collision.gameObject.GetComponent<HealthSystem>().HealHealth(); Destroy(gameObject);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<HealthSystem>().HealHealth(healAmount);
+            SoundManager.instance.PlayHealSound();
+            Destroy(gameObject);
+        }
     }
 }
