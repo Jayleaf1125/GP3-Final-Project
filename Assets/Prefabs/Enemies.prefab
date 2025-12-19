@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 2475892575995399702}
   - component: {fileID: 4503065625665708252}
   - component: {fileID: 5302346321935784953}
+  - component: {fileID: 6296861790322708687}
   m_Layer: 7
   m_Name: Enemies
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,7 +179,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 50
   healthbar: {fileID: 8010600470402659825}
+  colorChangeDelay: 0
   PlayerDebugging: 0
+--- !u!114 &6296861790322708687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324163943378114046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb91551447080354aa2e0d7459216acd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  HIT_OFFSET: 2
+  Speed: 2
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  patrolRangeDist: 5
+  chaseRangeDist: 4
+  attackRangeDist: 3.5
+  ShootParticle: {fileID: 5926276637946174122, guid: 234ad7969edf7494782cbacb67ec3fdd, type: 3}
 --- !u!1 &1786255462384141012
 GameObject:
   m_ObjectHideFlags: 0

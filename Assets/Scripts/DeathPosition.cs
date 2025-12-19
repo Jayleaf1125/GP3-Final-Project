@@ -28,6 +28,7 @@ public class DeathPosition : MonoBehaviour
 
     void SavePos()
     {
+        SoundManager.instance.PlayPlayerSacfriceSound();
         PosSave = new Vector2(transform.position.x, transform.position.y - 1);
         Instantiate(SaveLocationPrefab, PosSave, Quaternion.identity);
 

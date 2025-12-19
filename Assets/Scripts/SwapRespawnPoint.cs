@@ -24,6 +24,10 @@ public class SwapRespawnPoint : MonoBehaviour
 
         Collider2D player = hit.collider;
 
-        if (player != null) player.GetComponent<DeathPosition>().SetLastRespawnPoint(_newRespawnPoint);
+        if (player != null)
+        {
+            SoundManager.instance.PlayCheckpointSound();
+            player.GetComponent<DeathPosition>().SetLastRespawnPoint(_newRespawnPoint);
+        }
     }
 }

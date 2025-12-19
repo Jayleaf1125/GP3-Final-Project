@@ -16,6 +16,7 @@ public class InputManager : Singleton<InputManager>, IPlayerActions
     public event Action Sacrfirce = delegate { };
     public event Action Jump = delegate { };
     public event Action Shoot = delegate { };
+    public event Action Dash = delegate { };
     #endregion
 
     public Vector2 MoveDirection => inputActions.Player.Move.ReadValue<Vector2>();
@@ -70,5 +71,10 @@ public class InputManager : Singleton<InputManager>, IPlayerActions
     public void OnShoot(InputAction.CallbackContext context)
     {
         if (context.performed) Shoot.Invoke();
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.performed) Dash.Invoke();
     }
 }

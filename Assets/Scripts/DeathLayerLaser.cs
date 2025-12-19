@@ -23,6 +23,10 @@ public class DeathLayerLaser : MonoBehaviour
 
         Collider2D player = hit.collider;
 
-        if (player != null) player.GetComponent<DeathPosition>().ResetPlayerPos();
+        if (player != null)
+        {
+            SoundManager.instance.PlayPlayerDeathSound();
+            player.GetComponent<DeathPosition>().ResetPlayerPos();
+        }
     }
 }
