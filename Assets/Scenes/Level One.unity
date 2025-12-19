@@ -2775,6 +2775,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemies
       objectReference: {fileID: 0}
+    - target: {fileID: 6296861790322708687, guid: c24f10bfc44659f47af73f3435470e6d, type: 3}
+      propertyPath: playerObj
+      value: 
+      objectReference: {fileID: 1578185280}
+    - target: {fileID: 6296861790322708687, guid: c24f10bfc44659f47af73f3435470e6d, type: 3}
+      propertyPath: _enemyDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296861790322708687, guid: c24f10bfc44659f47af73f3435470e6d, type: 3}
+      propertyPath: chaseRangeDist
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296861790322708687, guid: c24f10bfc44659f47af73f3435470e6d, type: 3}
+      propertyPath: attackRangeDist
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8372372224921285257, guid: c24f10bfc44659f47af73f3435470e6d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.41
