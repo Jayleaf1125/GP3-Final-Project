@@ -1,10 +1,6 @@
-using System;
-using Unity.VisualScripting;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using TMPro.EditorUtilities;
 
 public class HealthSystem : MonoBehaviour
 {
@@ -89,14 +85,6 @@ public class HealthSystem : MonoBehaviour
 
         UpdateHealthbar();
     }
-
-    IEnumerator SpawnPlayerDeathVFX(Transform pos)
-    {
-        ParticleSystem obj = Instantiate(_playDeathParticle, pos);
-        yield return new WaitForSeconds(0.6f);
-        Destroy(obj);
-    }
-
     public void HealHealth(float heal)
     {
         float reamainingHealth = _currentHealth + heal;

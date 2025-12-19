@@ -1,7 +1,5 @@
 using UnityEngine;
-using System.Collections.Generic;
 using System.Collections;
-using UnityEngine.Rendering;
 
 enum EnemyState
 {
@@ -18,7 +16,6 @@ public enum StartDirection
 public class EnemySystem : MonoBehaviour
 {
     SpriteRenderer _sr;
-    Rigidbody2D _rb;
     Vector2 _vm = Vector2.right;
     public LayerMask groundLayer;
 
@@ -42,7 +39,6 @@ public class EnemySystem : MonoBehaviour
     //public float attackRangeDist;
 
     public ParticleSystem ShootParticle;
-    bool _alreadyBoosted = false;
     [SerializeField] float _enemyDamage;
 
     public GameObject playerObj;
@@ -129,12 +125,10 @@ public class EnemySystem : MonoBehaviour
         if (_isPlayerInChaseRange)
         {
             _sr.color = Color.yellow;
-            _alreadyBoosted = false;
             _currState = EnemyState.Attack;
-            } else
+        } else
         {
             _sr.color = _originalColor;
-            _alreadyBoosted = false;
             _currState = EnemyState.Patrol;
         }
     }
