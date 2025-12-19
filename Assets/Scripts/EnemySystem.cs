@@ -9,6 +9,12 @@ enum EnemyState
     Attack
 };
 
+public enum StartDirection
+{
+    Left,
+    Right
+};
+
 public class EnemySystem : MonoBehaviour
 {
     SpriteRenderer _sr;
@@ -23,11 +29,13 @@ public class EnemySystem : MonoBehaviour
     public float Speed;
 
     EnemyState _currState = EnemyState.Patrol;
+    public StartDirection _currDirection;
     Color _originalColor;
 
     bool _isPlayerInChaseRange = false;
     //bool _isPlayerInAttackRange = false;
     public LayerMask playerLayer;
+    public LayerMask enemyLayer;
 
     [Header("State Settings")]
     public float attackRangeDist;
@@ -44,6 +52,8 @@ public class EnemySystem : MonoBehaviour
     {
         _sr = GetComponent<SpriteRenderer>();
         _originalColor = _sr.color;
+
+        _vm = _currDirection == StartDirection.Left ? Vector2.left : Vector2.right;
     }
 
     // Update is called once per frame
@@ -53,6 +63,7 @@ public class EnemySystem : MonoBehaviour
         CheckIfPlayerInChaseRange();
         SetDirection();
         SetState();
+        playerObj = GameObject.Find("Player");
     }
 
     private void FixedUpdate()

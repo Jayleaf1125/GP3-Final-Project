@@ -16,13 +16,13 @@ public class DeathPosition : MonoBehaviour
 
     private void OnEnable()
     {
-        _inputManager.inputActions.Player.Enable();
+        //_inputManager.inputActions.Player.Enable();
         _inputManager.Sacrfirce += SavePos;
     }
 
     private void OnDisable()
     {
-        _inputManager.inputActions.Player.Disable();
+        //_inputManager.inputActions.Player.Disable();
         _inputManager.Sacrfirce -= SavePos;
     }
 
