@@ -36,6 +36,11 @@ public class InputManager : Singleton<InputManager>, IPlayerActions
         inputActions.Player.SetCallbacks(this);
     }
 
+    private void OnEnable()
+    {
+        inputActions.Player.Enable();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

@@ -15,6 +15,9 @@ public class SoundManager : Singleton<SoundManager>
     AudioSource playerAttackSound;
     AudioSource healSound;
 
+    [Range(0, 1)]
+    public float volumeAmount;
+
     private protected override void Awake()
     {
         base.Awake();
@@ -35,6 +38,8 @@ public class SoundManager : Singleton<SoundManager>
         playerSacfriceSound = allAudioSources[8];
         playerAttackSound = allAudioSources[9];
         healSound = allAudioSources[10];
+
+        foreach (AudioSource audioSource in allAudioSources) audioSource.volume = volumeAmount;
     }
 
     public void PlayBackgroundMusicSound() => backgroundMusicSound.Play();

@@ -77,15 +77,17 @@ public class HealthSystem : MonoBehaviour
         if (gameObject.CompareTag("Player"))
         {
             _soundManager.PlayPlayerDeathSound();
-            StartCoroutine(SpawnPlayerDeathVFX(transform.transform));
+            gameObject.SetActive(false);
+            //StartCoroutine(SpawnPlayerDeathVFX(transform.transform));
+            //LevelManager.instance.MoveScene(2);
         }
         else
         {
             _soundManager.PlayEnemyDeathSound();
+            Destroy(gameObject);
         }
 
         UpdateHealthbar();
-        Destroy(gameObject);
     }
 
     IEnumerator SpawnPlayerDeathVFX(Transform pos)

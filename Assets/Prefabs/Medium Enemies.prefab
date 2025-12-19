@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5302346321935784953}
   - component: {fileID: 6296861790322708687}
   m_Layer: 7
-  m_Name: Enemies
+  m_Name: Medium Enemies
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.29692605, g: 0.4056604, b: 0.23153257, a: 1}
+  m_Color: {r: 0.40392157, g: 0.32390693, b: 0.23137255, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -177,9 +177,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f90467c89c07f0743b8ce55adafee617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 50
+  _maxHealth: 75
   healthbar: {fileID: 8010600470402659825}
   colorChangeDelay: 0
+  _playDeathParticle: {fileID: 0}
   PlayerDebugging: 0
 --- !u!114 &6296861790322708687
 MonoBehaviour:
@@ -197,13 +198,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   HIT_OFFSET: 2
-  Speed: 2
+  Speed: 3.5
+  _currDirection: 0
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
   attackRangeDist: 3
-  ShootParticle: {fileID: 5926276637946174122, guid: 234ad7969edf7494782cbacb67ec3fdd, type: 3}
-  _enemyDamage: 1
+  ShootParticle: {fileID: 5926276637946174122, guid: 2dbdf0eb45371a74d8575f0769445649, type: 3}
+  _enemyDamage: 5
   playerObj: {fileID: 0}
 --- !u!1 &1786255462384141012
 GameObject:
