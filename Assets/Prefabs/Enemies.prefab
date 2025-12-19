@@ -201,10 +201,10 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  patrolRangeDist: 5
-  chaseRangeDist: 4
-  attackRangeDist: 3.5
+  attackRangeDist: 3
   ShootParticle: {fileID: 5926276637946174122, guid: 234ad7969edf7494782cbacb67ec3fdd, type: 3}
+  _enemyDamage: 1
+  playerObj: {fileID: 0}
 --- !u!1 &1786255462384141012
 GameObject:
   m_ObjectHideFlags: 0
